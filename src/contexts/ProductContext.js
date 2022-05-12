@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const ProductContext = createContext();
 
@@ -9,11 +9,13 @@ const ProductProvider = ({ children }) => {
     desc: "Iya bapakku lagi mancing di laut seru bgt",
   });
 
+  const value = { jokowiObj, setJokowiObj };
+
   return (
-    <ProductContext.Provider value={jokowiObj}>
-      {children}
-    </ProductContext.Provider>
+    <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
   );
 };
 
-export { ProductContext, ProductProvider };
+const useProduct = () => useContext(ProductContext);
+
+export { ProductContext, ProductProvider, useProduct };
