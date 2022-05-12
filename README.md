@@ -68,3 +68,51 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Cara pakai context secara mantap
+
+1. bikin folder contexts untuk menampung si contextnya apa?
+2. bikin file TerserahContext.js atau misal ProductContext.js
+3. didalam file ProductContext.js kita inisiasi si contextnya terlebih dahulu, dengan beberapa baris kode dan jangan lupa di export
+
+```js
+import { createContext } from "react";
+export const ProductContext = createContext(); // ini buat bikin context
+```
+
+4. lalu kita perlu untuk membuat sebuah component wrapper di dalam file yang tadi dimana fungsinya adalah kita bisa menjadikan component wrapper ini sebagai Provider yang diperlukan apabila si komponen memerlukan context ini, dengan cara
+
+```js
+const ProductProvider = ({ children }) => {
+  const [jokowiObj, setJokowiObj] = useState({
+    url: "https://cdn-brilio-net.akamaized.net/news/2017/12/28/136783/thumbnail-7-momen-jokowi-sukses-curi-perhatian-di-tahun-2017-171228c.jpg",
+    title: "Bapakku lagi mancing",
+    desc: "Iya bapakku lagi mancing di laut seru bgt",
+  });
+  return (
+    <ProductContext.Provider value={jokowiObj}>
+      {" "}
+      // nanti jadi Provider
+      {children} // return semua child component yang ada diantara provider
+    </ProductContext.Provider>
+  );
+};
+```
+
+dan jangan lupa di export filenya
+
+```js
+export { ProductContext, ProductProvider };
+```
+
+5. Di dalam root file, atau di file index.js kita perlu import si provider yang telah dibuat tadi, lalu kita bungkus Child component yang ada dengan Provider tadi.
+6. Untuk mengambil data state yang tersedia di context yang telah di store tadi. Pada komponen yang ingin memakai, bisa langsung diambil saja datanya dengan menggunakan hooks yaitu useContext. Pertama tama import dulu si Contextnya lalu dipakai dimasukan kedalam parameter useContext
+
+```js
+import { useContext } from "react";
+import ProductContext from "../../contexts/ProductContext";
+
+const tampunganObj = useContext(ProductContext);
+```
+
+7.
