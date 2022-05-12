@@ -115,4 +115,4 @@ import ProductContext from "../../contexts/ProductContext";
 const tampunganObj = useContext(ProductContext);
 ```
 
-7.
+7. si object yang berfungsi sebagai tampungan useContext langsung bisa dipakai...
