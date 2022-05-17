@@ -89,8 +89,11 @@ const ProductProvider = ({ children }) => {
     title: "Bapakku lagi mancing",
     desc: "Iya bapakku lagi mancing di laut seru bgt",
   });
+  
+  const value = { jokowiObj, setJokowiObj }
+  
   return (
-    <ProductContext.Provider value={jokowiObj}>
+    <ProductContext.Provider value={value}>
       {" "}
       // nanti jadi Provider
       {children} // return semua child component yang ada diantara provider
@@ -112,7 +115,7 @@ export { ProductContext, ProductProvider };
 import { useContext } from "react";
 import ProductContext from "../../contexts/ProductContext";
 
-const tampunganObj = useContext(ProductContext);
+const { jokowiObj, setJokowiObj }  = useContext(ProductContext);
 ```
 
 7. si object yang berfungsi sebagai tampungan useContext langsung bisa dipakai...
